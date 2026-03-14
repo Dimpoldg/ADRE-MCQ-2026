@@ -1,3 +1,4 @@
+{
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,4 +106,83 @@ const questions=[
 
 {q:"Indus Valley Civilization ka script kaisa hai?",o:["Fully readable","Partially readable","Not yet decoded","Latin"],a:"Not yet decoded"},
 
-{
+{q:"Great Bath kaha mila?",o:["Harappa","Mohenjo-daro","Lothal","Dholavira"],a:"Mohenjo-daro"},
+
+{q:"Lothal kis cheez ke liye famous hai?",o:["Dockyard","Temple","Fort","Market"],a:"Dockyard"},
+
+{q:"Indus Valley ke log kya karte the?",o:["Agriculture","Trade","Craft","All of these"],a:"All of these"},
+
+{q:"Indus Valley Civilization ka decline kab hua?",o:["1900 BCE","1500 BCE","1000 BCE","500 BCE"],a:"1900 BCE"},
+
+{q:"Indus Valley ke ghar kis se bane hote the?",o:["Stone","Wood","Baked bricks","Mud only"],a:"Baked bricks"},
+
+{q:"Dholavira kaha hai?",o:["Gujarat","Punjab","Rajasthan","Haryana"],a:"Gujarat"},
+
+{q:"Harappa ko kisne discover kiya?",o:["Dayaram Sahni","John Marshall","Alexander","Ashoka"],a:"Dayaram Sahni"},
+
+{q:"Indus Valley Civilization kis river system me tha?",o:["Indus River","Ganga River","Yamuna River","Godavari River"],a:"Indus River"},
+
+{q:"Indus Valley log kis animal ko sacred mante the?",o:["Horse","Bull","Tiger","Elephant"],a:"Bull"},
+
+{q:"Indus Valley ka famous statue kaun sa hai?",o:["Dancing Girl","Buddha Statue","Ashoka Lion","Iron Pillar"],a:"Dancing Girl"},
+
+{q:"Indus Valley Civilization kis period ka part hai?",o:["Ancient India","Medieval India","Modern India","British India"],a:"Ancient India"}
+
+]
+
+const quiz=document.getElementById("quiz")
+
+questions.forEach((q,i)=>{
+
+let html=`<div class="question"><b>${i+1}. ${q.q}</b><br>`
+
+q.o.forEach(opt=>{
+html+=`<label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label><br>`
+})
+
+html+="</div>"
+
+quiz.innerHTML+=html
+
+})
+
+function submitQuiz(){
+
+let score=0
+
+questions.forEach((q,i)=>{
+
+let ans=document.querySelector(`input[name="q${i}"]:checked`)
+
+if(ans && ans.value===q.a){
+score++
+}
+
+})
+
+document.getElementById("result").innerText="Your Score: "+score+" / "+questions.length
+
+}
+
+let time=600
+
+const timer=setInterval(()=>{
+
+let m=Math.floor(time/60)
+let s=time%60
+
+document.getElementById("timer").innerText="Time Left: "+m+":"+(s<10?"0":"")+s
+
+time--
+
+if(time<0){
+clearInterval(timer)
+submitQuiz()
+}
+
+},1000)
+
+</script>
+
+</body>
+</html>
