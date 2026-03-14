@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ashok Dynasty MCQ Test</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f2f2f2;
+padding:20px;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+}
+
+h1{
+text-align:center;
+}
+
+.question{
+margin-top:20px;
+}
+
+button{
+margin-top:20px;
+padding:10px 20px;
+background:green;
+color:white;
+border:none;
+border-radius:5px;
+}
+
+#timer{
+font-size:20px;
+color:red;
+text-align:right;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Ashok Dynasty MCQ Test</h1>
+
+<div id="timer">Time Left: 10:00</div>
+
+<form id="quizForm"></form>
+
+<button onclick="submitQuiz()">Submit Test</button>
+
+<h2 id="result"></h2>
+
+</div>
+
+<script>
+
+const questions=[
+
+{
+q:"Ashoka kis dynasty se belong karte the?",
+o:["Gupta","Maurya","Chola","Mughal"],
+a:"Maurya"
+},
+
+{
+q:"Ashoka ke father ka naam kya tha?",
+o:["Chandragupta Maurya","Bindusara","Harsha","Bimbisara"],
+a:"Bindusara"
+},
+
+{
+q:"Ashoka kis war ke baad Buddhism follow karne lage?",
+o:["Panipat","Kalinga","Plassey","Hydaspes"],
+a:"Kalinga"
+},
+
+{
+q:"Kalinga war kab hua tha?",
+o:["261 BCE","200 BCE","150 BCE","100 BCE"],
+a:"261 BCE"
+},
+
+{
+q:"Ashoka ne kis religion ko promote kiya?",
+o:["Hinduism","Jainism","Buddhism","Sikhism"],
+a:"Buddhism"
+},
+
+{
+q:"Ashoka ke inscriptions ko kya kaha jata hai?",
+o:["Edicts","Manuscripts","Scriptures","Tablets"],
+a:"Edicts"
+},
+
+{
+q:"Ashoka ke edicts kis language me likhe gaye the?",
+o:["Sanskrit","Pali","Prakrit","Tamil"],
+a:"Prakrit"
+},
+
+{
+q:"Ashoka ka capital kya tha?",
+o:["Taxila","Pataliputra","Delhi","Ujjain"],
+a:"Pataliputra"
+},
+
+{
+q:"Maurya empire ka founder kaun tha?",
+o:["Ashoka","Bindusara","Chandragupta Maurya","Harsha"],
+a:"Chandragupta Maurya"
+},
+
+{
+q:"Ashoka ka symbol kya tha?",
+o:["Lotus","Lion Capital","Elephant","Tiger"],
+a:"Lion Capital"
+},
+
+{
+q:"Ashoka ka famous pillar kaha hai?",
+o:["Sarnath","Agra","Delhi","Patna"],
+a:"Sarnath"
+},
+
+{
+q:"Ashoka ka rule kab tak chala?",
+o:["268–232 BCE","200–150 BCE","300–250 BCE","150–100 BCE"],
+a:"268–232 BCE"
+},
+
+{
+q:"Ashoka ke guru kaun the?",
+o:["Chanakya","Upagupta","Kalidasa","Aryabhata"],
+a:"Upagupta"
+},
+
+{
+q:"Ashoka ka title kya tha?",
+o:["Devanampriya","Raja","Samrat","Maharaja"],
+a:"Devanampriya"
+},
+
+{
+q:"Ashoka ne Buddhism kaha spread kiya?",
+o:["Sri Lanka","China","Japan","Korea"],
+a:"Sri Lanka"
+},
+
+{
+q:"Ashoka ke son ka naam kya tha?",
+o:["Mahinda","Rahul","Vikram","Ajatashatru"],
+a:"Mahinda"
+},
+
+{
+q:"Ashoka ke daughter ka naam kya tha?",
+o:["Sanghamitra","Radha","Sita","Ganga"],
+a:"Sanghamitra"
+},
+
+{
+q:"Ashoka ka dhamma kya promote karta tha?",
+o:["War","Violence","Peace","Trade"],
+a:"Peace"
+},
+
+{
+q:"Ashoka ka empire kaha tak phaila tha?",
+o:["North India","Whole Subcontinent","East India","South India"],
+a:"Whole Subcontinent"
+},
+
+{
+q:"Ashoka ke baad Maurya empire ka kya hua?",
+o:["Strong hua","Decline hua","Europe tak phaila","Mughal ban gaya"],
+a:"Decline hua"
+}
+
+]
+
+const form=document.getElementById("quizForm")
+
+questions.forEach((q,index)=>{
+
+let html=`<div class="question"><b>${index+1}. ${q.q}</b><br>`
+
+q.o.forEach(opt=>{
+
+html+=`<label>
+<input type="radio" name="q${index}" value="${opt}">
+${opt}
+</label><br>`
+
+})
+
+html+="</div>"
+
+form.innerHTML+=html
+
+})
+
+function submitQuiz(){
+
+let score=0
+
+questions.forEach((q,index)=>{
+
+let ans=document.querySelector(`input[name="q${index}"]:checked`)
+
+if(ans && ans.value===q.a){
+
+score++
+
+}
+
+})
+
+document.getElementById("result").innerText=
+"Your Score: "+score+" / "+questions.length
+
+}
+
+let time=600
+
+const timer=setInterval(()=>{
+
+let minutes=Math.floor(time/60)
+let seconds=time%60
+
+document.getElementById("timer").innerText=
+"Time Left: "+minutes+":"+seconds
+
+time--
+
+if(time<0){
+
+clearInterval(timer)
+submitQuiz()
+
+}
+
+},1000)
+
+</script>
+
+</body>
+  </html>
