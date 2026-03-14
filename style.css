@@ -1,0 +1,98 @@
+body {
+    font-family: 'Arial', sans-serif;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    background: linear-gradient(to right, #f0f8ff, #d0e6f7);
+}
+
+header {
+    text-align: center;
+    padding: 30px;
+    border-radius: 15px;
+    background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+    color: #2c3e50;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px #555;
+}
+
+.highlight {
+    font-weight: bold;
+    color: #34495e;
+    margin: 5px 0;
+}
+
+#features {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.feature-card {
+    flex: 1;
+    min-width: 250px;
+    background: #fff3e0;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.feature-card:hover {
+    transform: scale(1.05);
+}
+
+#mcq-section {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.mcq-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-left: 6px solid #3498db;
+    background: #f0f8ff;
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+
+.mcq-item:hover {
+    transform: scale(1.02);
+}
+
+button {
+    margin-top: 10px;
+    padding: 7px 15px;
+    border: none;
+    background: linear-gradient(to right, #3498db, #9b59b6);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+button:hover {
+    background: linear-gradient(to right, #9b59b6, #3498db);
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 15px;
+    background: #ffd180;
+    border-radius: 10px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
