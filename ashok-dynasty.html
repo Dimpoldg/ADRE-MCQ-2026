@@ -8,7 +8,7 @@
 
 body{
 font-family:Arial;
-background:#f2f2f2;
+background:linear-gradient(135deg,#4facfe,#00f2fe);
 padding:20px;
 }
 
@@ -16,31 +16,60 @@ padding:20px;
 max-width:800px;
 margin:auto;
 background:white;
-padding:20px;
-border-radius:10px;
+padding:25px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
 h1{
 text-align:center;
+color:#333;
 }
 
 .question{
 margin-top:20px;
+padding:10px;
+background:#f9f9f9;
+border-radius:8px;
+}
+
+label{
+display:block;
+padding:5px;
+cursor:pointer;
+}
+
+label:hover{
+background:#e8f5ff;
+border-radius:5px;
 }
 
 button{
 margin-top:20px;
-padding:10px 20px;
-background:green;
+padding:12px 25px;
+background:#ff5722;
 color:white;
 border:none;
-border-radius:5px;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#e64a19;
 }
 
 #timer{
 font-size:20px;
-color:red;
+color:#ff0000;
 text-align:right;
+font-weight:bold;
+}
+
+#result{
+text-align:center;
+color:green;
+margin-top:20px;
 }
 
 </style>
@@ -67,125 +96,26 @@ text-align:right;
 
 const questions=[
 
-{
-q:"Ashoka kis dynasty se belong karte the?",
-o:["Gupta","Maurya","Chola","Mughal"],
-a:"Maurya"
-},
-
-{
-q:"Ashoka ke father ka naam kya tha?",
-o:["Chandragupta Maurya","Bindusara","Harsha","Bimbisara"],
-a:"Bindusara"
-},
-
-{
-q:"Ashoka kis war ke baad Buddhism follow karne lage?",
-o:["Panipat","Kalinga","Plassey","Hydaspes"],
-a:"Kalinga"
-},
-
-{
-q:"Kalinga war kab hua tha?",
-o:["261 BCE","200 BCE","150 BCE","100 BCE"],
-a:"261 BCE"
-},
-
-{
-q:"Ashoka ne kis religion ko promote kiya?",
-o:["Hinduism","Jainism","Buddhism","Sikhism"],
-a:"Buddhism"
-},
-
-{
-q:"Ashoka ke inscriptions ko kya kaha jata hai?",
-o:["Edicts","Manuscripts","Scriptures","Tablets"],
-a:"Edicts"
-},
-
-{
-q:"Ashoka ke edicts kis language me likhe gaye the?",
-o:["Sanskrit","Pali","Prakrit","Tamil"],
-a:"Prakrit"
-},
-
-{
-q:"Ashoka ka capital kya tha?",
-o:["Taxila","Pataliputra","Delhi","Ujjain"],
-a:"Pataliputra"
-},
-
-{
-q:"Maurya empire ka founder kaun tha?",
-o:["Ashoka","Bindusara","Chandragupta Maurya","Harsha"],
-a:"Chandragupta Maurya"
-},
-
-{
-q:"Ashoka ka symbol kya tha?",
-o:["Lotus","Lion Capital","Elephant","Tiger"],
-a:"Lion Capital"
-},
-
-{
-q:"Ashoka ka famous pillar kaha hai?",
-o:["Sarnath","Agra","Delhi","Patna"],
-a:"Sarnath"
-},
-
-{
-q:"Ashoka ka rule kab tak chala?",
-o:["268–232 BCE","200–150 BCE","300–250 BCE","150–100 BCE"],
-a:"268–232 BCE"
-},
-
-{
-q:"Ashoka ke guru kaun the?",
-o:["Chanakya","Upagupta","Kalidasa","Aryabhata"],
-a:"Upagupta"
-},
-
-{
-q:"Ashoka ka title kya tha?",
-o:["Devanampriya","Raja","Samrat","Maharaja"],
-a:"Devanampriya"
-},
-
-{
-q:"Ashoka ne Buddhism kaha spread kiya?",
-o:["Sri Lanka","China","Japan","Korea"],
-a:"Sri Lanka"
-},
-
-{
-q:"Ashoka ke son ka naam kya tha?",
-o:["Mahinda","Rahul","Vikram","Ajatashatru"],
-a:"Mahinda"
-},
-
-{
-q:"Ashoka ke daughter ka naam kya tha?",
-o:["Sanghamitra","Radha","Sita","Ganga"],
-a:"Sanghamitra"
-},
-
-{
-q:"Ashoka ka dhamma kya promote karta tha?",
-o:["War","Violence","Peace","Trade"],
-a:"Peace"
-},
-
-{
-q:"Ashoka ka empire kaha tak phaila tha?",
-o:["North India","Whole Subcontinent","East India","South India"],
-a:"Whole Subcontinent"
-},
-
-{
-q:"Ashoka ke baad Maurya empire ka kya hua?",
-o:["Strong hua","Decline hua","Europe tak phaila","Mughal ban gaya"],
-a:"Decline hua"
-}
+{q:"Ashoka kis dynasty se belong karte the?",o:["Gupta","Maurya","Chola","Mughal"],a:"Maurya"},
+{q:"Ashoka ke father ka naam kya tha?",o:["Chandragupta Maurya","Bindusara","Harsha","Bimbisara"],a:"Bindusara"},
+{q:"Ashoka kis war ke baad Buddhism follow karne lage?",o:["Panipat","Kalinga","Plassey","Hydaspes"],a:"Kalinga"},
+{q:"Kalinga war kab hua tha?",o:["261 BCE","200 BCE","150 BCE","100 BCE"],a:"261 BCE"},
+{q:"Ashoka ne kis religion ko promote kiya?",o:["Hinduism","Jainism","Buddhism","Sikhism"],a:"Buddhism"},
+{q:"Ashoka ke inscriptions ko kya kaha jata hai?",o:["Edicts","Manuscripts","Scriptures","Tablets"],a:"Edicts"},
+{q:"Ashoka ke edicts kis language me likhe gaye the?",o:["Sanskrit","Pali","Prakrit","Tamil"],a:"Prakrit"},
+{q:"Ashoka ka capital kya tha?",o:["Taxila","Pataliputra","Delhi","Ujjain"],a:"Pataliputra"},
+{q:"Maurya empire ka founder kaun tha?",o:["Ashoka","Bindusara","Chandragupta Maurya","Harsha"],a:"Chandragupta Maurya"},
+{q:"Ashoka ka symbol kya tha?",o:["Lotus","Lion Capital","Elephant","Tiger"],a:"Lion Capital"},
+{q:"Ashoka ka famous pillar kaha hai?",o:["Sarnath","Agra","Delhi","Patna"],a:"Sarnath"},
+{q:"Ashoka ka rule kab tak chala?",o:["268–232 BCE","200–150 BCE","300–250 BCE","150–100 BCE"],a:"268–232 BCE"},
+{q:"Ashoka ke guru kaun the?",o:["Chanakya","Upagupta","Kalidasa","Aryabhata"],a:"Upagupta"},
+{q:"Ashoka ka title kya tha?",o:["Devanampriya","Raja","Samrat","Maharaja"],a:"Devanampriya"},
+{q:"Ashoka ne Buddhism kaha spread kiya?",o:["Sri Lanka","China","Japan","Korea"],a:"Sri Lanka"},
+{q:"Ashoka ke son ka naam kya tha?",o:["Mahinda","Rahul","Vikram","Ajatashatru"],a:"Mahinda"},
+{q:"Ashoka ke daughter ka naam kya tha?",o:["Sanghamitra","Radha","Sita","Ganga"],a:"Sanghamitra"},
+{q:"Ashoka ka dhamma kya promote karta tha?",o:["War","Violence","Peace","Trade"],a:"Peace"},
+{q:"Ashoka ka empire kaha tak phaila tha?",o:["North India","Whole Subcontinent","East India","South India"],a:"Whole Subcontinent"},
+{q:"Ashoka ke baad Maurya empire ka kya hua?",o:["Strong hua","Decline hua","Europe tak phaila","Mughal ban gaya"],a:"Decline hua"}
 
 ]
 
@@ -196,12 +126,7 @@ questions.forEach((q,index)=>{
 let html=`<div class="question"><b>${index+1}. ${q.q}</b><br>`
 
 q.o.forEach(opt=>{
-
-html+=`<label>
-<input type="radio" name="q${index}" value="${opt}">
-${opt}
-</label><br>`
-
+html+=`<label><input type="radio" name="q${index}" value="${opt}"> ${opt}</label>`
 })
 
 html+="</div>"
@@ -219,15 +144,12 @@ questions.forEach((q,index)=>{
 let ans=document.querySelector(`input[name="q${index}"]:checked`)
 
 if(ans && ans.value===q.a){
-
 score++
-
 }
 
 })
 
-document.getElementById("result").innerText=
-"Your Score: "+score+" / "+questions.length
+document.getElementById("result").innerText="Your Score: "+score+" / "+questions.length
 
 }
 
@@ -238,8 +160,7 @@ const timer=setInterval(()=>{
 let minutes=Math.floor(time/60)
 let seconds=time%60
 
-document.getElementById("timer").innerText=
-"Time Left: "+minutes+":"+seconds
+document.getElementById("timer").innerText="Time Left: "+minutes+":"+(seconds<10?"0":"")+seconds
 
 time--
 
@@ -255,4 +176,4 @@ submitQuiz()
 </script>
 
 </body>
-  </html>
+</html>
