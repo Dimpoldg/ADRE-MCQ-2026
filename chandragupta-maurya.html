@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Chandragupta Maurya MCQ Test</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:linear-gradient(135deg,#667eea,#764ba2);
+padding:20px;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 15px 30px rgba(0,0,0,0.2);
+}
+
+h1{
+text-align:center;
+color:#333;
+}
+
+#timer{
+text-align:right;
+font-size:20px;
+font-weight:bold;
+color:red;
+margin-bottom:15px;
+}
+
+.question{
+margin-top:15px;
+padding:15px;
+background:#f0f4ff;
+border-left:6px solid #667eea;
+border-radius:8px;
+}
+
+label{
+display:block;
+margin-top:5px;
+}
+
+button{
+margin-top:20px;
+padding:12px 25px;
+background:linear-gradient(45deg,#ff6a00,#ff3c00);
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+opacity:0.9;
+}
+
+#result{
+text-align:center;
+margin-top:20px;
+font-size:22px;
+color:green;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Chandragupta Maurya MCQ Test</h1>
+
+<div id="timer">Time Left: 10:00</div>
+
+<form id="quiz"></form>
+
+<button onclick="submitQuiz()">Submit Test</button>
+
+<h2 id="result"></h2>
+
+</div>
+
+<script>
+
+const questions=[
+
+{q:"Maurya Empire ka founder kaun tha?",o:["Ashoka","Chandragupta Maurya","Bindusara","Harsha"],a:"Chandragupta Maurya"},
+
+{q:"Chandragupta Maurya ka guru kaun tha?",o:["Kalidasa","Aryabhata","Chanakya","Panini"],a:"Chanakya"},
+
+{q:"Maurya Empire ka capital kya tha?",o:["Taxila","Pataliputra","Delhi","Ujjain"],a:"Pataliputra"},
+
+{q:"Chandragupta Maurya ne kis ruler ko haraya tha?",o:["Dhana Nanda","Ashoka","Bindusara","Harsha"],a:"Dhana Nanda"},
+
+{q:"Maurya Empire kab establish hua?",o:["322 BCE","200 BCE","150 BCE","100 BCE"],a:"322 BCE"},
+
+{q:"Chandragupta Maurya ne kis foreign ruler ko defeat kiya?",o:["Alexander","Seleucus","Napoleon","Caesar"],a:"Seleucus"},
+
+{q:"Arthashastra kisne likha?",o:["Chanakya","Kalidasa","Ashoka","Aryabhata"],a:"Chanakya"},
+
+{q:"Chandragupta Maurya ke baad kaun ruler bana?",o:["Ashoka","Bindusara","Harsha","Samudragupta"],a:"Bindusara"},
+
+{q:"Greek ambassador kaun tha Maurya court me?",o:["Megasthenes","Plato","Aristotle","Socrates"],a:"Megasthenes"},
+
+{q:"Megasthenes ne kaunsi book likhi?",o:["Indica","Arthashastra","Vedas","Ramayana"],a:"Indica"}
+
+]
+
+const quiz=document.getElementById("quiz")
+
+questions.forEach((q,i)=>{
+
+let html=`<div class="question"><b>${i+1}. ${q.q}</b><br>`
+
+q.o.forEach(opt=>{
+html+=`<label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label>`
+})
+
+html+="</div>"
+
+quiz.innerHTML+=html
+
+})
+
+function submitQuiz(){
+
+let score=0
+
+questions.forEach((q,i)=>{
+
+let ans=document.querySelector(`input[name="q${i}"]:checked`)
+
+if(ans && ans.value===q.a){
+score++
+}
+
+})
+
+document.getElementById("result").innerText="Your Score: "+score+" / "+questions.length
+
+}
+
+let time=600
+
+const timer=setInterval(()=>{
+
+let m=Math.floor(time/60)
+let s=time%60
+
+document.getElementById("timer").innerText="Time Left: "+m+":"+(s<10?"0":"")+s
+
+time--
+
+if(time<0){
+clearInterval(timer)
+submitQuiz()
+}
+
+},1000)
+
+</script>
+
+</body>
+</html>
