@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="as">
+<head>
+<meta charset="UTF-8">
+<title>History MCQ Test 2</title>
+
+<style>
+body{
+  font-family:Arial;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  padding:20px;
+}
+
+.container{
+  max-width:800px;
+  margin:auto;
+  background:white;
+  padding:20px;
+  border-radius:12px;
+}
+
+h2{text-align:center;}
+
+.question{
+  margin:15px 0;
+  padding:10px;
+  border-bottom:1px solid #ccc;
+}
+
+button{
+  display:block;
+  width:100%;
+  margin:5px 0;
+  padding:10px;
+  border:none;
+  background:#eee;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#4facfe;
+  color:white;
+}
+
+.answer{
+  font-weight:bold;
+  margin-top:5px;
+}
+
+#result{
+  text-align:center;
+  font-size:20px;
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>📚 History MCQ Test (Set 2)</h2>
+<div id="quiz"></div>
+<button onclick="submitQuiz()">Submit</button>
+<div id="result"></div>
+</div>
+
+<script>
+
+const quizData = [
+
+{
+q:"বিক্ৰমাদিত্য উপাধি কোন ৰজাই গ্ৰহণ কৰিছিল?",
+a:["অশোক","সমুদ্রগুপ্ত","চন্দ্ৰগুপ্ত-I","চন্দ্ৰগুপ্ত-II"],
+correct:3
+},
+
+{
+q:"গুপ্ত যুগত ভাৰতলৈ অহা বিদেশী পর্যটক কোন আছিল?",
+a:["হিউৱেন চাং","ফাহিয়ান","আলবেৰুণী","মেগাস্থেনিছ"],
+correct:1
+},
+
+{
+q:"দশমিক পদ্ধতি আৰু পাইৰ মান নির্ণয় কৰা বিজ্ঞানী কোন?",
+a:["আৰ্যভট্ট","বৰাহমিহিৰ","ব্ৰহ্মগুপ্ত","চৰক"],
+correct:0
+},
+
+{
+q:"মৃচ্ছকটিকম গ্ৰন্থৰ লেখক কোন?",
+a:["কালিদাস","বিশাখদত্ত","শূদ্ৰক","অশ্বঘোষ"],
+correct:2
+},
+
+{
+q:"হর্ষবর্ধনে কোনখন গ্ৰন্থ ৰচনা কৰা নাছিল?",
+a:["নাগানন্দ","ৰত্নাবলী","প্ৰিয়দৰ্শিকা","মুদ্রাৰাক্ষস"],
+correct:3
+},
+
+{
+q:"নালন্দা বিশ্ববিদ্যালয়ৰ প্ৰথম উপাচাৰ্য কোন আছিল?",
+a:["শীলভদ্ৰ","হিউৱেন চাং","অশ্বঘোষ","কোনোটাই নহয়"],
+correct:0
+},
+
+{
+q:"হিউৱেন চাং ভাৰতলৈ কেতিয়া আহিছিল?",
+a:["630 খ্ৰীষ্টাব্দ","644 খ্ৰীষ্টাব্দ","647 খ্ৰীষ্টাব্দ","কোনোটাই নহয়"],
+correct:0
+},
+
+{
+q:"'সি-ইউ-কি' গ্ৰন্থৰ লেখক কোন?",
+a:["ফাহিয়ান","হিউৱেন চাং","হুই লি","কোনোটাই নহয়"],
+correct:1
+},
+
+{
+q:"মহাবলিপুৰমৰ শিৱ মন্দিৰটো কোনে নিৰ্মাণ কৰিছিল?",
+a:["মহেন্দ্ৰ বর্মন","নৰসিংহ বর্মন-II","ৰাজেন্দ্ৰ চোল","কোনোটাই নহয়"],
+correct:1
+},
+
+{
+q:"সিন্ধ জয় কৰি ভাৰতত মুছলমান শাসনৰ পথ মুকলি কৰা সেনাপতি কোন?",
+a:["মহম্মদ ঘোৰী","মহম্মদ বিন কাছিম","মামুদ গজনী","বখতিয়াৰ খিলজী"],
+correct:1
+},
+
+{
+q:"তৰাইনৰ প্ৰথম আৰু দ্বিতীয় যুদ্ধ কাৰ মাজত হৈছিল?",
+a:["ঘোৰী আৰু পৃথ্বীৰাজ","বাবৰ আৰু সংগ্রাম সিংহ","মামুদ আৰু জয়পাল","কোনোটাই নহয়"],
+correct:0
+},
+
+{
+q:"কুতুব মিনাৰ নিৰ্মাণ কোনে আৰম্ভ কৰিছিল?",
+a:["ইলতুতমিছ","কুতুবুদ্দিন আইবক","আকবৰ","কোনোটাই নহয়"],
+correct:1
+},
+
+{
+q:"আলাউদ্দিন খিলজীৰ বজাৰ নিয়ন্ত্ৰণ বিষয়াজন কোন আছিল?",
+a:["শাহনা-ই-মণ্ডি","মুকদ্দম","খুট","আমিল"],
+correct:0
+},
+
+{
+q:"আলাই দৰৱাজা কোনে নিৰ্মাণ কৰিছিল?",
+a:["আকবৰ","আলাউদ্দিন খিলজী","শাহজাহান","কুতুবুদ্দিন"],
+correct:1
+},
+
+{
+q:"ফিৰোজাবাদ নগৰখন কোনে নিৰ্মাণ কৰিছিল?",
+a:["আকবৰ","আলাউদ্দিন","ফিৰোজ শ্বাহ টুঘলক","কোনোটাই নহয়"],
+correct:2
+},
+
+{
+q:"দাস বংশৰ প্রতিষ্ঠাতা কোন?",
+a:["কুতুবুদ্দিন আইবক","আলাউদ্দিন","ইলতুতমিছ","কোনোটাই নহয়"],
+correct:0
+},
+
+{
+q:"দিল্লীৰ প্ৰথম মহিলা শাসক কোন আছিল?",
+a:["ৰাজিয়া সুলতানা","গুলবদন বেগম","নুৰজাহান","কোনোটাই নহয়"],
+correct:0
+},
+
+{
+q:"বিজয়নগৰ সাম্রাজ্যৰ প্রতিষ্ঠাতা কোন?",
+a:["বাহমন শ্বাহ","হৰিহৰ আৰু বুক্ক","বাবৰ","শ্ৰীবিজয়"],
+correct:1
+},
+
+{
+q:"টালিকোটাৰ যুদ্ধ কেতিয়া হৈছিল?",
+a:["1575","1565","1526","কোনোটাই নহয়"],
+correct:1
+},
+
+{
+q:"পানিপথৰ প্ৰথম যুদ্ধ কেতিয়া হৈছিল?",
+a:["1526","1556","1565","কোনোটাই নহয়"],
+correct:0
+},
+
+{
+q:"হলদিঘাটৰ যুদ্ধ কেতিয়া হৈছিল?",
+a:["1576","1565","1556","কোনোটাই নহয়"],
+correct:0
+}
+
+];
+
+let userAnswers=[];
+
+function loadQuiz(){
+const quiz=document.getElementById("quiz");
+
+quizData.forEach((q,index)=>{
+let div=document.createElement("div");
+div.classList.add("question");
+
+let html=`<p>${index+1}. ${q.q}</p>`;
+
+q.a.forEach((opt,i)=>{
+html+=`<button onclick="selectAnswer(${index},${i},this)">${opt}</button>`;
+});
+
+html+=`<p class="answer" id="ans${index}"></p>`;
+
+div.innerHTML=html;
+quiz.appendChild(div);
+});
+}
+
+function selectAnswer(qIndex,ans,btn){
+userAnswers[qIndex]=ans;
+
+let buttons=btn.parentElement.querySelectorAll("button");
+buttons.forEach(b=>{
+b.style.background="#eee";
+b.style.color="black";
+});
+
+btn.style.background="#4facfe";
+btn.style.color="white";
+}
+
+function submitQuiz(){
+let score=0;
+
+document.querySelectorAll(".question").forEach((qDiv,i)=>{
+
+let buttons=qDiv.querySelectorAll("button");
+
+buttons.forEach((btn,index)=>{
+
+if(index===quizData[i].correct){
+btn.style.background="green";
+btn.style.color="white";
+}
+
+if(userAnswers[i]===index && index!==quizData[i].correct){
+btn.style.background="red";
+btn.style.color="white";
+}
+
+btn.disabled=true;
+});
+
+document.getElementById("ans"+i).innerHTML=
+"✔ Correct: "+quizData[i].a[quizData[i].correct];
+
+if(userAnswers[i]===quizData[i].correct){
+score++;
+}
+
+});
+
+document.getElementById("result").innerHTML=
+"✅ Score: "+score+" / "+quizData.length;
+}
+
+loadQuiz();
+
+</script>
+
+</body>
+  </html>
