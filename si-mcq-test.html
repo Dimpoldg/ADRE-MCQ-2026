@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SI Exam Full MCQ Test</title>
+
+<style>
+body{
+  font-family:Arial;
+  background:linear-gradient(135deg,#43cea2,#185a9d);
+  padding:20px;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  background:white;
+  padding:20px;
+  border-radius:12px;
+}
+
+.question{
+  margin:15px 0;
+  padding:10px;
+  border-radius:8px;
+  background:#f9f9f9;
+}
+
+.option{
+  display:block;
+  padding:5px;
+  border-radius:5px;
+}
+
+.correct{
+  background:#28a745;
+  color:white;
+}
+
+.wrong{
+  background:#dc3545;
+  color:white;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  font-size:18px;
+  background:#28a745;
+  color:white;
+  border:none;
+  border-radius:8px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+<h2>SI Exam MCQ Test (Full)</h2>
+
+<form id="quizForm"></form>
+
+<button onclick="checkAnswers()">Submit</button>
+
+<h2 id="result"></h2>
+
+</div>
+
+<script>
+
+const quizData = [
+{q:"জয়মতী চিনেমাখনত জয়মতী চৰিত্ৰত কোনে অভিনয় কৰিছিল?",o:["আইদেউ সন্দিকৈ","জুবিন গাৰ্গ","ভূপেন হাজৰিকা","ৰবীন্দ্ৰনাথ"],a:0},
+{q:"বুদ্ধই ক'ত নিৰ্বাণ লাভ কৰিছিল?",o:["লুম্বিনী","বুদ্ধ গয়া","সাৰনাথ","কাশী"],a:1},
+{q:"কানাডাৰ ৰাজধানী কি?",o:["Toronto","Ottawa","Vancouver","Montreal"],a:1},
+{q:"Dandiya Raas কোন ৰাজ্যৰ নৃত্য?",o:["পাঞ্জাব","গুজৰাট","ৰাজস্থান","হাৰিয়ানা"],a:1},
+{q:"Delhi Sultanate ৰ শেষৰজন হিন্দু ৰজা?",o:["অশোক","পৃথিৰাজ চৌহান","শিৱাজী","চন্দ্ৰগুপ্ত"],a:1},
+{q:"শৰাইঘাটৰ যুদ্ধ কেতিয়া হৈছিল?",o:["1600","1671","1700","1750"],a:1},
+{q:"Harry Potter ৰ লিখক কোন?",o:["J.K. Rowling","Tagore","Shakespeare","Premchand"],a:0},
+{q:"সত্যমেৱ জয়তে ক'ৰ পৰা?",o:["গীতা","মুণ্ডকা উপনিষদ","বেদ","ৰামায়ণ"],a:1},
+{q:"AASU প্ৰথম অধিৱেশন ক'ত?",o:["ডিব্ৰুগড়","গুৱাহাটী","শিৱসাগৰ","তেজপুৰ"],a:1},
+{q:"ক্ৰীড়া দিৱস কেতিয়া?",o:["3 Sept","5 June","15 Aug","2 Oct"],a:0},
+{q:"বড়োসকলৰ গামোচা নাম?",o:["আৰনাই","গামোচা","দুপট্টা","চাদৰ"],a:0},
+{q:"Fundamental Duties কোন সংশোধনী?",o:["42","44","52","30"],a:0},
+{q:"বন্দে মাতৰম কোন ভাষা?",o:["সংস্কৃত","হিন্দী","ইংৰাজী","বাংলা"],a:0},
+{q:"অগ্নিকবি কাক কয়?",o:["কমলাকান্ত","টেগোৰ","নজৰুল","হেমচন্দ্ৰ"],a:0},
+{q:"Fauji (1989) ত কোন আছিল?",o:["শ্বাহৰুখ খান","সালমান","আমিৰ","অক্ষয়"],a:0},
+{q:"অৰুণোদয় প্ৰথম ক'ত?",o:["শিৱসাগৰ","গুৱাহাটী","ডিব্ৰুগড়","যোৰহাট"],a:0},
+{q:"হৰ্ণবিল উৎসৱ ক'ত?",o:["অসম","নাগালেণ্ড","মণিপুৰ","মেঘালয়"],a:1},
+{q:"জুবিন গাৰ্গে কোনখন চিনেমাত নাই?",o:["Rockstar","Mission China","Tumi Mur Mathu Mur","Hiya Diya Niya"],a:0},
+{q:"ফুলগুৰি বিদ্ৰোহ কোন নদীৰ কাষত?",o:["ব্ৰহ্মপুত্ৰ","কলং","বৰাক","সুবানশিৰী"],a:1},
+{q:"Davis Cup কোন খেল?",o:["Cricket","Football","Tennis","Hockey"],a:2},
+{q:"চিলাৰায়ৰ আসল নাম?",o:["শুক্লধ্বজ","লাচিত","সুকাফা","গদাধৰ"],a:0},
+{q:"Nobel Prize কোন শাখাত নাই?",o:["Physics","Chemistry","Astronomy","Peace"],a:2},
+{q:"মণিৰাম দেৱান লগত কাক ফাঁচী?",o:["পিয়লি বৰুৱা","লাচিত","চিলাৰায়","গোপীনাথ"],a:0},
+{q:"কৰম পূজা কোন মাহত?",o:["ভাদ","বহাগ","আহাৰ","কাতি"],a:0},
+{q:"সূৰ্যৰ পৰা সপ্তম গ্ৰহ?",o:["Saturn","Uranus","Neptune","Mars"],a:1},
+{q:"Dialysis কোন অংগ?",o:["হৃদয়","বৃক্ক","মগজ","ফুসফুস"],a:1},
+{q:"Beri Beri কোন ভিটামিন?",o:["A","B","C","D"],a:1},
+{q:"ধোদৰ আলি কোনে নিৰ্মাণ কৰিছিল?",o:["গদাধৰ সিংহ","লাচিত","সুকাফা","অহোম ৰজা"],a:0}
+];
+
+const form = document.getElementById("quizForm");
+
+quizData.forEach((item,index)=>{
+let html = `<div class="question"><p>${index+1}. ${item.q}</p>`;
+item.o.forEach((opt,i)=>{
+html += `<label class="option"><input type="radio" name="q${index}" value="${i}"> ${opt}</label>`;
+});
+html += `</div>`;
+form.innerHTML += html;
+});
+
+function checkAnswers(){
+let score=0;
+
+quizData.forEach((item,index)=>{
+let options = document.getElementsByName("q"+index);
+let selected = document.querySelector(`input[name="q${index}"]:checked`);
+
+options.forEach((opt,i)=>{
+let label = opt.parentElement;
+
+if(i === item.a){
+label.classList.add("correct"); // correct always green
+}
+
+if(selected && parseInt(selected.value) === i && i !== item.a){
+label.classList.add("wrong"); // wrong selected red
+}
+});
+
+if(selected && parseInt(selected.value) === item.a){
+score++;
+}
+});
+
+document.getElementById("result").innerHTML =
+"Your Score: "+score+" / "+quizData.length;
+}
+
+</script>
+
+</body>
+</html>
