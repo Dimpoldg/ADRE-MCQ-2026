@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SI Exam MCQ Test - Page 2</title>
+
+<style>
+body{
+  font-family:Arial;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  padding:20px;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  background:white;
+  padding:20px;
+  border-radius:12px;
+}
+
+.question{
+  margin:15px 0;
+  padding:10px;
+  border-radius:8px;
+  background:#f9f9f9;
+}
+
+.option{
+  display:block;
+  padding:5px;
+  border-radius:5px;
+}
+
+.correct{
+  background:#28a745;
+  color:white;
+}
+
+.wrong{
+  background:#dc3545;
+  color:white;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  font-size:18px;
+  margin-top:10px;
+  background:#28a745;
+  color:white;
+  border:none;
+  border-radius:8px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+<h2>SI Exam MCQ Test (Page 2)</h2>
+
+<form id="quizForm"></form>
+
+<button onclick="checkAnswers()">Submit</button>
+<button onclick="goBack()">⬅️ Previous Page</button>
+
+<h2 id="result"></h2>
+
+</div>
+
+<script>
+
+const quizData = [
+{q:"29. গুপ্ত বংশ কোনে প্ৰতিষ্ঠা কৰিছিল?",o:["চন্দ্ৰগুপ্ত","শ্ৰী গুপ্ত","অশোক","বিন্দুসাৰ"],a:1},
+{q:"30. নাও খেলৰ লগত কোনটো উৎসৱ জড়িত?",o:["ৰঙালী বিহু","ভোগালী বিহু","কাতি বিহু","বিহু নহয়"],a:1},
+{q:"31. অসম এচচিয়েচন কেতিয়া গঠন কৰা হৈছিল?",o:["1903","1910","1920","1885"],a:0},
+{q:"32. যোৰহাট সাৰ্বজনিক সভাৰ প্ৰতিষ্ঠাপক কোন?",o:["গোপীনাথ বৰদলৈ","জগন্নাথ বৰুৱা","তাৰুণ ৰাম ফুকন","লাচিত"],a:1},
+{q:"33. মোৱামৰীয়া বিদ্ৰোহ কেতিয়া হৈছিল?",o:["1750","1769","1800","1826"],a:1},
+{q:"34. ব্ৰহ্মপুত্ৰ নদীক চীনত কি নামেৰে জনা যায়?",o:["Yangtze","Tsangpo","Hwang Ho","Mekong"],a:1},
+{q:"35. Grammatical Notes on Assamese Language কোনে লিখিছিল?",o:["Nathan Brown","William Carey","Hutton","Max Muller"],a:0},
+{q:"36. স্বাধীন অসমৰ প্ৰথম ৰাজ্যপাল কোন আছিল?",o:["Gopinath Bordoloi","Akbar Hydari","Nehru","Rajendra Prasad"],a:1},
+{q:"37. ব্ৰিটিছে কেতিয়া কছাৰী ৰাজ্য অধিকাৰ কৰিছিল?",o:["1826","1830","1832","1840"],a:2},
+{q:"38. 12, 13, 25, 38, ?, 101, 164",o:["50","63","70","80"],a:1},
+{q:"39. মিবুগাবা কোন জনগোষ্ঠীৰ সাজ?",o:["বড়ো","মিশিং","কাৰ্বি","ৰাভা"],a:1},
+{q:"40. লাচিমাৰ কৃষক বিদ্ৰোহ কেতিয়া হৈছিল?",o:["1857","1894","1905","1919"],a:1},
+{q:"41. বুদ্ধদেৱৰ পৰিনিৰ্বাণ ক'ত হৈছিল?",o:["লুম্বিনী","বুদ্ধ গয়া","সাৰনাথ","কুশীনগৰ"],a:3},
+{q:"42. দাণ্ডি যাত্ৰাত অসমৰ প্ৰতিনিধি কোন আছিল?",o:["গোপীনাথ বৰদলৈ","তাৰুণ ৰাম ফুকন","মহেন্দ্ৰ","কনকলতা"],a:1},
+{q:"43. Hepatitis ৰোগে কোন অংগ প্ৰভাৱিত কৰে?",o:["হৃদয়","ফুসফুস","যকৃত","মগজ"],a:2},
+{q:"44. গোলমেজ বৈঠকত অসমৰ পৰা কোনে অংশগ্ৰহণ কৰিছিল?",o:["বৰদলৈ","তাৰুণ ৰাম ফুকন","লাচিত","বেজবৰুৱা"],a:1},
+{q:"45. চুকাফা আহোঁতে মৰাণ ৰজা কোন আছিল?",o:["বাধা দেউতা","লাচিত","চিলাৰায়","সুকাফা"],a:0},
+{q:"46. ৰেডক্লিফ ৰেখা কোন দেশৰ মাজত?",o:["India-China","India-Bangladesh","India-Pakistan","India-Nepal"],a:2},
+{q:"47. 'মিলন' কাৰ আলোচনী আছিল?",o:["বেজবৰুৱা","হেমচন্দ্ৰ","শংকৰদেৱ","কাকতি"],a:0},
+{q:"48. Covaxin কোনে বিকাশ কৰিছিল?",o:["Serum Institute","Bharat Biotech","WHO","Pfizer"],a:1},
+{q:"49. ব্ৰিটিছে কেতিয়া কাছাৰ দখল কৰিছিল?",o:["1826","1832","1840","1857"],a:1},
+{q:"50. Covid-19 কিহৰ দ্বাৰা হয়?",o:["ব্যাক্টেৰিয়া","ভাইৰাছ","ফাংগাস","প্ৰটোজোৱা"],a:1},
+{q:"51. ভাৰতৰ ৰাজধানী কি?",o:["Mumbai","Delhi","Kolkata","Chennai"],a:1},
+{q:"52. বিশ্বৰ আটাইতকৈ ডাঙৰ মহাসাগৰ?",o:["Atlantic","Indian","Pacific","Arctic"],a:2},
+{q:"53. ভাৰতৰ ৰাষ্ট্ৰীয় পশু কি?",o:["সিংহ","বাঘ","হাতী","ঘোঁৰা"],a:1}
+];
+
+const form = document.getElementById("quizForm");
+
+quizData.forEach((item,index)=>{
+let html = `<div class="question"><p>${item.q}</p>`;
+item.o.forEach((opt,i)=>{
+html += `<label class="option"><input type="radio" name="q${index}" value="${i}"> ${opt}</label>`;
+});
+html += `</div>`;
+form.innerHTML += html;
+});
+
+function checkAnswers(){
+let score=0;
+
+quizData.forEach((item,index)=>{
+let options = document.getElementsByName("q"+index);
+let selected = document.querySelector(`input[name="q${index}"]:checked`);
+
+options.forEach((opt,i)=>{
+let label = opt.parentElement;
+
+if(i === item.a){
+label.classList.add("correct");
+}
+
+if(selected && parseInt(selected.value) === i && i !== item.a){
+label.classList.add("wrong");
+}
+});
+
+if(selected && parseInt(selected.value) === item.a){
+score++;
+}
+});
+
+document.getElementById("result").innerHTML =
+"Your Score: "+score+" / "+quizData.length;
+}
+
+function goBack(){
+window.location.href = "si-test1.html";
+}
+
+</script>
+
+</body>
+</html>
