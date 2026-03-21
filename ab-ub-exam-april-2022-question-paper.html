@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AB/UB Exam April 2022 Question Paper</title>
+
+<style>
+body{
+  font-family:Arial;
+  background:linear-gradient(135deg,#43cea2,#185a9d);
+  padding:20px;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  background:white;
+  padding:20px;
+  border-radius:12px;
+}
+
+.question{
+  margin:15px 0;
+  padding:10px;
+  background:#f9f9f9;
+  border-radius:8px;
+}
+
+.option{
+  display:block;
+  padding:8px;
+  margin:4px 0;
+  border-radius:6px;
+}
+
+.correct{
+  background:#28a745;
+  color:white;
+}
+
+.wrong{
+  background:#dc3545;
+  color:white;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  background:#ff5722;
+  color:white;
+  border:none;
+  border-radius:8px;
+  font-size:18px;
+}
+
+.back-btn{
+  display:block;
+  text-align:center;
+  margin-top:20px;
+  padding:12px;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  color:black;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+<h2>📄 AB/UB Exam April 2022 Question Paper</h2>
+
+<form id="quizForm"></form>
+
+<button onclick="checkAnswers()">Submit</button>
+
+<h2 id="result"></h2>
+
+<a href="index.html" class="back-btn">⬅️ Back to Home</a>
+
+</div>
+
+<script>
+
+const quizData = [
+{q:"গুৱাহাটী দূৰদৰ্শন কেন্দ্ৰ কিমান চনত স্থাপন হৈছিল?",o:["1948","1950","1960","1970"],a:0},
+{q:"অসম এছচিয়েচন কোনে প্ৰতিষ্ঠা কৰিছিল?",o:["মানিক চন্দ্ৰ বৰুৱা","গোপীনাথ","লাচিত","শংকৰদেৱ"],a:0},
+{q:"জয়সাগৰ পুখুৰী কোনে খন্দাইছিল?",o:["ৰুদ্ৰ সিংহ","লাচিত","সুকাফা","গদাধৰ"],a:0},
+{q:"গড়গঞা ৰজা কোন?",o:["চুক্লেংমুং","লাচিত","সুকাফা","গদাধৰ"],a:0},
+{q:"অসম বিধানসভাৰ মুঠ আসন?",o:["126","100","110","120"],a:0},
+{q:"ভাৰতৰ প্ৰথম ৰাষ্ট্ৰপতি?",o:["ৰাজেন্দ্ৰ প্ৰসাদ","নেহৰু","গান্ধী","পেটেল"],a:0},
+{q:"ৰীতা চৌধুৰীৰ উপন্যাস?",o:["মাকাম","দেৱদাস","গীতাঞ্জলি","ঘৰে বাহিৰে"],a:0},
+{q:"শঙ্কৰদেৱ জন্ম?",o:["বৰদোৱা","মাজুলী","তেজপুৰ","গুৱাহাটী"],a:0},
+{q:"আউনীআটী সত্ৰ ক'ত?",o:["মাজুলী","অসম","নগাঁও","ডিব্ৰুগড়"],a:0},
+{q:"লোকপ্ৰিয় কাক কয়?",o:["গোপীনাথ বৰদলৈ","লাচিত","নেহৰু","গান্ধী"],a:0},
+{q:"বন্দে মাতৰম ৰচয়িতা?",o:["বঙ্কিম চন্দ্ৰ","টেগোৰ","নেহৰু","গান্ধী"],a:0},
+{q:"সন্তোষ ট্ৰফী কোন খেল?",o:["ফুটবল","ক্রিকেট","হকি","টেনিছ"],a:0},
+{q:"কটন কলেজ কেতিয়া?",o:["1901","1800","1950","2000"],a:0},
+{q:"ৰীমা দাস কোন ক্ষেত্ৰ?",o:["চলচ্চিত্ৰ","সাহিত্য","সংগীত","খেল"],a:0},
+{q:"ব্যাঘ্ৰ প্ৰকল্প?",o:["1973","1980","1990","2000"],a:0},
+{q:"বৃহত্তম মহাসাগৰ?",o:["প্ৰশান্ত","আটলান্টিক","ভাৰত","আৰ্কটিক"],a:0},
+{q:"তৃতীয় বৃহত্তম মহাসাগৰ?",o:["ভাৰত","প্ৰশান্ত","আটলান্টিক","আৰ্কটিক"],a:0},
+{q:"(-4)×(-5)?",o:["20","10","-20","-10"],a:0},
+{q:"কম্পিউটাৰৰ পিতৃ?",o:["Charles Babbage","Newton","Einstein","Tesla"],a:0},
+{q:"'অ' মোৰ আপোনাৰ দেশ' ৰচক?",o:["লক্ষ্মীনাথ বেজবৰুৱা","টেগোৰ","নেহৰু","গান্ধী"],a:0},
+{q:"চাহ বাগিচা নাই?",o:["বৰপেটা","দিব্ৰুগড়","তিনিচুকীয়া","শিৱসাগৰ"],a:0},
+{q:"36,49,?,81",o:["64","60","70","50"],a:0},
+{q:"বন্দিনী ভাৰত নাটক?",o:["অম্বিকাগিৰী","টেগোৰ","বেজবৰুৱা","নেহৰু"],a:0},
+{q:"ধুবনী ঘাট ক'ত?",o:["ধুবুৰী","গুৱাহাটী","তেজপুৰ","নগাঁও"],a:0},
+{q:"গৰুখুটি ক'ত?",o:["ছিপাঝাৰ","নগাঁও","তেজপুৰ","বৰপেটা"],a:0},
+{q:"বাণ ৰঙ্গমঞ্চ?",o:["তেজপুৰ","গুৱাহাটী","নগাঁও","ডিব্ৰুগড়"],a:0},
+{q:"গ্লোবাল ৱাৰ্মিং গেছ?",o:["CO2","O2","N2","H"],a:0},
+{q:"মহাবীৰ কোন ধৰ্ম?",o:["জৈন","বৌদ্ধ","হিন্দু","ইছলাম"],a:0},
+{q:"পাল বংশ প্ৰতিষ্ঠাপক?",o:["ব্ৰহ্মপাল","অশোক","চন্দ্ৰগুপ্ত","হৰ্ষ"],a:0},
+{q:"625 √ ?",o:["25","20","30","15"],a:0},
+{q:"প্ৰথম ICS?",o:["সত্যেন্দ্ৰনাথ ঠাকুৰ","নেহৰু","গান্ধী","টেগোৰ"],a:0},
+{q:"ৰামকৃষ্ণ মিছন?",o:["বিবেকানন্দ","নেহৰু","গান্ধী","টেগোৰ"],a:0},
+{q:"জাতিংগা কোন নদী?",o:["বৰাক","ব্ৰহ্মপুত্ৰ","সুবানশিৰী","লোহিত"],a:0},
+{q:"UN HQ?",o:["New York","Geneva","Delhi","London"],a:0},
+{q:"চুতীয়া ৰাজ্য প্ৰতিষ্ঠাপক?",o:["বীৰপাল","সুকাফা","লাচিত","গদাধৰ"],a:0},
+{q:"ডাঙৰ বিল?",o:["সোনবিল","দীপৰ বিল","চন্দুবিল","অন্যান্য"],a:0}
+];
+
+const form = document.getElementById("quizForm");
+
+quizData.forEach((item,index)=>{
+let html = `<div class="question"><p>${index+1}. ${item.q}</p>`;
+item.o.forEach((opt,i)=>{
+html += `<label class="option"><input type="radio" name="q${index}" value="${i}"> ${opt}</label>`;
+});
+html += `</div>`;
+form.innerHTML += html;
+});
+
+function checkAnswers(){
+let score=0;
+
+quizData.forEach((item,index)=>{
+let options = document.getElementsByName("q"+index);
+let selected = document.querySelector(`input[name="q${index}"]:checked`);
+
+options.forEach((opt,i)=>{
+let label = opt.parentElement;
+
+if(i === item.a){
+label.classList.add("correct");
+}
+
+if(selected && parseInt(selected.value) === i && i !== item.a){
+label.classList.add("wrong");
+}
+});
+
+if(selected && parseInt(selected.value) === item.a){
+score++;
+}
+});
+
+document.getElementById("result").innerHTML =
+"🎯 Your Score: "+score+" / "+quizData.length;
+}
+
+</script>
+
+</body>
+</html>
