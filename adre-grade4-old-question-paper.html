@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ADRE Grade 4 Old Question Paper</title>
+
+<style>
+body{
+  font-family:Arial;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  padding:20px;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  background:white;
+  padding:20px;
+  border-radius:12px;
+}
+
+.question{
+  margin:15px 0;
+  padding:10px;
+  background:#f9f9f9;
+  border-radius:8px;
+}
+
+.option{
+  display:block;
+  padding:8px;
+  border-radius:6px;
+  margin:4px 0;
+}
+
+.correct{
+  background:#28a745;
+  color:white;
+}
+
+.wrong{
+  background:#dc3545;
+  color:white;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  background:#ff5722;
+  color:white;
+  border:none;
+  border-radius:8px;
+  font-size:18px;
+}
+
+.back-btn{
+  display:block;
+  text-align:center;
+  margin-top:20px;
+  padding:12px;
+  background:linear-gradient(135deg,#00c6ff,#0072ff);
+  color:white;
+  text-decoration:none;
+  border-radius:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+<h2>📄 ADRE Grade 4 Old Question Paper</h2>
+
+<form id="quizForm"></form>
+
+<button onclick="checkAnswers()">Submit</button>
+
+<h2 id="result"></h2>
+
+<a href="index.html" class="back-btn">⬅️ Back to Home</a>
+
+</div>
+
+<script>
+
+const quizData = [
+{q:"পৃথিৱীৰ আটাইতকৈ জনবহুল দেশ কোনখন?",o:["ভাৰত","চীন","USA","ৰাছিয়া"],a:1},
+{q:"শ্ৰীলংকাৰ ৰাজধানী কি?",o:["কলম্বো","কেণ্ডি","গালে","জাফনা"],a:0},
+{q:"ভাৰতৰত্ন গ্ৰহণ কৰা প্ৰথম মহিলা কোন?",o:["ইন্দিৰা গান্ধী","সৰোজিনী","লতা","কল্পনা"],a:0},
+{q:"The Discovery of India কোনে লিখিছিল?",o:["নেহৰু","গান্ধী","টেগোৰ","আম্বেদকাৰ"],a:0},
+{q:"মহাকাশত প্ৰথম মানুহ?",o:["Armstrong","Yuri Gagarin","Rakesh","Buzz"],a:1},
+{q:"শিখ ধৰ্মৰ প্ৰতিষ্ঠাপক?",o:["Guru Nanak","Guru Gobind","Kabir","Ramananda"],a:0},
+{q:"Iron Man of India?",o:["Patel","Nehru","Gandhi","Subhash"],a:0},
+{q:"Teacher’s Day?",o:["5 Sept","15 Aug","2 Oct","26 Jan"],a:0},
+{q:"কোনজন ৰাষ্ট্ৰপতি নাছিল?",o:["Uma Bharti","Kalam","Pranab","Kovind"],a:0},
+{q:"WHO HQ?",o:["Geneva","Delhi","London","Paris"],a:0},
+{q:"Davis Cup?",o:["Cricket","Football","Tennis","Hockey"],a:2},
+{q:"CM appoint কৰে কোনে?",o:["Governor","PM","President","People"],a:0},
+{q:"Golden Temple?",o:["Amritsar","Delhi","Mumbai","Patna"],a:0},
+{q:"Chennai old name?",o:["Madras","Bombay","Calcutta","Pune"],a:0},
+{q:"Namdapha NP?",o:["Arunachal","Assam","Meghalaya","Nagaland"],a:0},
+{q:"Last Mughal?",o:["Bahadur Shah Zafar","Akbar","Shahjahan","Babur"],a:0},
+{q:"Maurya founder?",o:["Chandragupta","Ashoka","Bindusara","Harsha"],a:0},
+{q:"Hiuen Tsang came in?",o:["Harsha","Ashoka","Gupta","Mughal"],a:0},
+{q:"First PM India?",o:["Nehru","Gandhi","Patel","Indira"],a:0},
+{q:"1st Panipat winner?",o:["Babur","Lodhi","Akbar","Shivaji"],a:0},
+{q:"Not fossil fuel?",o:["Vegetable oil","Coal","Petrol","Gas"],a:0},
+{q:"Combustion needs?",o:["Oxygen","Hydrogen","Carbon","Nitrogen"],a:0},
+{q:"Not female organ?",o:["Breast","Uterus","Ovary","Tube"],a:0},
+{q:"Not planet?",o:["Ceres","Mars","Saturn","Mercury"],a:0},
+{q:"Greenhouse gas?",o:["CO2","O2","N2","He"],a:0},
+{q:"Opposite bride?",o:["Groom","Boy","Man","Son"],a:0},
+{q:"Past drive?",o:["Drove","Drive","Driven","Driving"],a:0},
+{q:"Group lions?",o:["Pride","Herd","Pack","Group"],a:0},
+{q:"Dog house?",o:["Kennel","Stable","Den","Nest"],a:0}
+];
+
+const form = document.getElementById("quizForm");
+
+quizData.forEach((item,index)=>{
+let html = `<div class="question"><p>${index+1}. ${item.q}</p>`;
+item.o.forEach((opt,i)=>{
+html += `<label class="option"><input type="radio" name="q${index}" value="${i}"> ${opt}</label>`;
+});
+html += `</div>`;
+form.innerHTML += html;
+});
+
+function checkAnswers(){
+let score=0;
+
+quizData.forEach((item,index)=>{
+let options = document.getElementsByName("q"+index);
+let selected = document.querySelector(`input[name="q${index}"]:checked`);
+
+options.forEach((opt,i)=>{
+let label = opt.parentElement;
+
+if(i === item.a){
+label.classList.add("correct");
+}
+
+if(selected && parseInt(selected.value) === i && i !== item.a){
+label.classList.add("wrong");
+}
+});
+
+if(selected && parseInt(selected.value) === item.a){
+score++;
+}
+});
+
+document.getElementById("result").innerHTML =
+"🎯 Score: "+score+" / "+quizData.length;
+}
+
+</script>
+
+</body>
+  </html>
