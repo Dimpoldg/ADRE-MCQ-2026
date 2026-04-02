@@ -1,111 +1,33 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Assam MCQ Test</title>
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header>
-  <h1>Assam Direct Recruitment (ADRE) Mock Tests</h1>
-  <p class="highlight">Assamese & English</p>
-  <p class="highlight">Includes Previous Year Questions</p>
+  <h1>📘 Assam MCQ Test</h1>
 </header>
 
-<!-- FEATURES -->
-<section id="features">
+<div id="home">
+  <h2>Select Mock Test</h2>
+  <div id="testList"></div>
+</div>
 
-  <div class="feature-card">
-    <h3>Mock Tests</h3>
-    <p>Practice online ADRE mock tests anytime.</p>
-  </div>
+<div id="quizBox" style="display:none;">
+  <h2 id="qTitle"></h2>
+  <div id="question"></div>
+  <div id="options"></div>
+  <button onclick="nextQ()">Next</button>
+  <h3 id="timer"></h3>
+</div>
 
-  <div class="feature-card">
-    <h3>Previous Year Questions</h3>
-    <p>Learn from past exam questions and improve your score.</p>
-  </div>
+<div id="result" style="display:none;"></div>
 
-  <div class="feature-card">
-    <h3>Assamese & English</h3>
-    <p>Choose your preferred language for MCQs.</p>
-  </div>
-
-</section>
-
-<!-- MCQ SECTION -->
-<section class="mcq-section">
-  <h2>🚀 Practice MCQs</h2>
-
-  <div class="mcq-grid">
-
-    <div class="mcq-card">
-      <h3>📘 Ashok Dynasty</h3>
-      <p>Indian History important MCQs</p>
-      <a href="ashok-dynasty.html">Start Test</a>
-    </div>
-
-    <div class="mcq-card">
-      <h3>📘 Chandragupta Maurya</h3>
-      <p>Learn Mauryan Empire questions</p>
-      <a href="chandragupta-maurya.html">Start Test</a>
-    </div>
-
-    <div class="mcq-card">
-      <h3>🏺 Indus Valley</h3>
-      <p>Ancient civilization MCQs</p>
-      <a href="indus-valley.html">Start Test</a>
-    </div>
-
-    <div class="mcq-card">
-      <h3>📚 Indian History</h3>
-      <p>Mixed practice questions</p>
-      <a href="indian-history-mcq.html">Start Test</a>
-    </div>
-
-    <div class="mcq-card highlight">
-      <h3>🔥 SI Mock Test</h3>
-      <p>Full length practice test</p>
-      <a href="si-mcq-test.html">Start Now</a>
-    </div>
-
-    <div class="mcq-card highlight">
-      <h3>📄 ADRE Grade 4</h3>
-      <p>Old Question Paper (Previous Year)</p>
-      <a href="adre-grade4-old-question-paper.html">Start Now</a>
-    </div>
-
-    <div class="mcq-card highlight">
-      <h3>📄 AB/UB Exam 2022</h3>
-      <p>April 2022 Old Question Paper</p>
-      <a href="ab-ub-exam-april-2022-question-paper.html">Start Now</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer style="background:#111; color:#fff; padding:20px; text-align:center; margin-top:40px;">
-
-  <h2>Assam MCQ Test</h2>
-
-  <p style="color:#ccc;">
-    MCQ Tests | Study Materials
-  </p>
-
-  <div style="margin:10px 0;">
-    <a href="about.html" style="color:#00c6ff; margin:0 10px;">About</a>
-    <a href="contact.html" style="color:#00c6ff; margin:0 10px;">Contact</a>
-    <a href="privacy.html" style="color:#00c6ff; margin:0 10px;">Privacy Policy</a>
-  </div>
-
-  <p style="color:#aaa;">
-    © 2026 Assam MCQ Test | All Rights Reserved
-  </p>
-
-</footer>
-
+<script src="questions.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
